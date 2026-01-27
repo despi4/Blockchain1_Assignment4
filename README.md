@@ -60,6 +60,7 @@ npx hardhat test
 
 ## Project Structure
 
+```
 contracts/
  ├─ MyToken.sol
  └─ MyNFT.sol
@@ -69,3 +70,4 @@ test/
  └─ mynft.test.cjs
 
 hardhat.config.cjs
+```
