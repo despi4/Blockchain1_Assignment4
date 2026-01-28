@@ -71,3 +71,6 @@ test/
 
 hardhat.config.cjs
 ```
+
+## Start Front-End
+python3 -m http.server 5173

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Part 3 — MyToken + MyNFT dApp</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 980px; margin: 24px auto; padding: 0 12px; }
+      .row { display: flex; gap: 16px; flex-wrap: wrap; }
+      .card { border: 1px solid #ddd; border-radius: 10px; padding: 16px; flex: 1; min-width: 320px; }
+      input, button { padding: 10px; width: 100%; margin: 6px 0; box-sizing: border-box; }
+      button { cursor: pointer; }
+      .muted { color: #666; font-size: 14px; }
+      .ok { color: #0a7; }
+      .err { color: #c00; white-space: pre-wrap; }
+      code { background: #f5f5f5; padding: 2px 6px; border-radius: 6px; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+      img { max-width: 100%; border-radius: 10px; border: 1px solid #eee; }
+    </style>
+  </head>
+
+  <body>
+    <h1>Part 3 — Minimal dApp (ERC-20 + ERC-721)</h1>
+    <p class="muted">
+      Requires MetaMask. Network must match where contracts are deployed (Hardhat localhost / Sepolia).
+    </p>
+
+    <div class="card">
+      <h2>Wallet</h2>
+      <button id="btnConnect">Connect MetaMask</button>
+      <div class="muted">Status: <span id="walletStatus">Not connected</span></div>
+      <div class="muted">Address: <span class="mono" id="walletAddress">-</span></div>
+      <div class="muted">ChainId: <span id="chainId">-</span></div>
+    </div>
+
+    <div class="row">
+      <div class="card">
+        <h2>ERC-20 — MyToken</h2>
+
+        <div class="muted">Token contract: <span class="mono" id="tokenAddressLabel">-</span></div>
+        <div>Name: <b id="tokenName">-</b></div>
+        <div>Symbol: <b id="tokenSymbol">-</b></div>
+
+        <button id="btnRefreshToken">Refresh balance</button>
+        <div>My balance: <b id="tokenBalance">-</b></div>
+
+        <h3>Transfer</h3>
+        <input id="toAddress" placeholder="Recipient address (0x...)" />
+        <input id="amount" placeholder="Amount (e.g. 1.5)" />
+        <button id="btnTransfer">Send transfer</button>
+
+        <div class="muted">Tx hash: <span class="mono" id="txHash">-</span></div>
+        <div id="txResult" class="muted"></div>
+      </div>
+
+      <div class="card">
+        <h2>ERC-721 — MyNFT</h2>
+
+        <div class="muted">NFT contract: <span class="mono" id="nftAddressLabel">-</span></div>
+
+        <h3>Check ownership + tokenURI</h3>
+        <input id="tokenIdInput" placeholder="Token ID (e.g. 0)" />
+        <button id="btnCheckToken">Check token</button>
+
+        <div>Owner: <b class="mono" id="nftOwner">-</b></div>
+        <div>tokenURI: <b class="mono" id="nftTokenURI">-</b></div>
+
+        <h3>Metadata</h3>
+        <button id="btnLoadMetadata">Load metadata from tokenURI</button>
+        <div id="metadataBox" class="muted">-</div>
+        <div id="imageBox"></div>
+
+        <h3>List minted tokens</h3>
+        <button id="btnListMinted">Load minted token IDs</button>
+        <div class="muted">Minted token IDs:</div>
+        <div class="mono" id="mintedList">-</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Logs</h2>
+      <div id="logOk" class="ok"></div>
+      <div id="logErr" class="err"></div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
